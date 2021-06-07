@@ -1,4 +1,4 @@
- if ($do == 'add') {
+    if ($do == 'add') {
 
     ?>
 
@@ -102,18 +102,6 @@
                             $user_edu = $_POST['user_edu'];
                             $user_image = $_FILES['user_image']['name'];
                             $temp_image = $_FILES['user_image']['temp_image'];
-
-                            $add_users_sql = "INSERT INTO users (u_name,u_image,u_email,u_password,u_address,u_phone,u_dob,u_gender,u_bio,u_education,u_role,u_status) VALUES ('$user_name','','$user_email','$user_pass','$user_address','$user_phone','$user_date','$user_gender','$user_bio','$user_edu','$user_role','$user_status')";
-
-                            $users_sql_db = mysqli_query($db, $add_users_sql);
-
-                            if ($users_sql_db) {
-                                header('Location: users.php');
-                            } else {
-                                echo "INPUT Users details failed";
-                            }
-
-
 
                             if (!empty($user_name)) {
 
