@@ -126,9 +126,11 @@
                                     //3 steps //sql //sql>database //feedback
 
 
-                                    $user_sql = "INSERT INTO users (u_name,u_image,u_email,u_password,u_address,u_phone,u_dob,u_gender,u_bio,u_education,u_role,u_status) VALUES ('$user_name','', '$user_email','$user_pass', '$user_address', 0, 0, 0,  'user_bio', '$user_edu', 0, 0)";
+                                    $user_sql = "INSERT INTO user (u_name,u_image,u_email,u_password,u_address,u_phone,u_dob,u_gender,u_bio,u_education,u_role,u_status) VALUES ('$user_name','$update_img', '$user_email','$user_pass', '$user_address','$user_phone', '$user_date', '$user_gender', 'user_bio', '$user_edu', '$user_role','$user_status')";
+
                                     
-                                    //('$user_name','$update_img', '$user_email','$user_pass', '$user_address','$user_phone', '$user_date', '$user_gender', 'user_bio', '$user_edu', '$user_role','$user_status')
+                                    //('$user_name','', '$user_email','$user_pass', '$user_address', 0, 0, 0,  'user_bio', '$user_edu', 0, 0)
+                                    
 
                                     $user_result = mysqli_query($db, $user_sql);
 
