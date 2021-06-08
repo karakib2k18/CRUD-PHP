@@ -1,13 +1,11 @@
     if ($do == 'add') {
-
     ?>
-
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-12 col sm-12">
                 <div class="white-box analytics-info">
-                    <h3 class="box-title">Add New Users</h3>
+                    <h3 class="box-title">Add New Category</h3>
                     <ul class="list-inline two-part">
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST">
                             <div class="row justify-content-center">
                                 <div class="col-md-6 col-sm-12 col-lg-6">
                                     <div class="mb-3">
@@ -40,10 +38,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-lg-6">
+
                                     <div class="mb-3">
-                                        <label for="exampleSelect1">Select Gender</label>
-                                        <select name="user_gender" class="form-select" aria-label="Default select example1">
-                                            <option selected>Select Gender</option>
+
+                                        <label for="exampleSelect1">Select Your Gender</label>
+                                        <select class="form-control" id="exampleSelect1" name="user_gender">
+                                            <option> Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                             <option value="Others">Others</option>
@@ -51,8 +51,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleSelect2">Select Role</label>
-                                        <select name="user_role" class="form-select" aria-label="Default select example2">
-                                            <option selected>Select Status</option>
+                                        <select name="user_role" class="form-select" id="exampleSelect2">
+                                            <option>Select Role</option>
                                             <option value="0">Subscriber</option>
                                             <option value="1">Editor</option>
                                             <option value="2">Admin</option>
@@ -60,8 +60,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleSelect3">Select Status</label>
-                                        <select name="user_status" class="form-select" aria-label="Default select example3">
-                                            <option selected>Select Status</option>
+                                        <select name="user_status" class="form-select" id="exampleSelect3">
+                                            <option>Select Status</option>
                                             <option value="0">Inactive</option>
                                             <option value="1">Active</option>
                                         </select>
@@ -85,7 +85,7 @@
                             </div>
                         </form>
 
-
+                        <!-- category code inserted here -->
                         <?php
 
                         if (isset($_POST['user_submit'])) {
@@ -103,32 +103,39 @@
                             $user_image = $_FILES['user_image']['name'];
                             $temp_image = $_FILES['user_image']['temp_image'];
 
+
                             if (!empty($user_name)) {
 
-                                $explode = explode('.', $_FILES['user_image']['name']);
+                                $split = explode('.', $_FILES['user_image']['name']);
 
-                                $end = strtolower(end($explode));
+                                $extn = strtolower(end($split));
 
-                                $array = array('jpg', 'png', 'jpeg');
+                                $array1 = array('jpg', 'png', 'jpeg');
 
 
-                                if (in_array($end, $array) === true) {
+                                if (in_array($extn, $array1) === true) {
 
                                     $random = rand();
-                                    $update_img = $random . $user_image;
+                                    $update_img = $random.$user_image;
 
-                                    move_uploaded_file($temp_image, 'img/users/' . $update_name);
+                                    move_uploaded_file($temp_image, 'img/users/'.$update_img);
 
                                     $encrypt_password = sha1($user_pass);
 
-                                    $addusers = "INSERT INTO users (u_name,u_image,u_email,u_password,u_address,u_phone,u_dob,u_gender,u_bio,u_education,u_role,u_status) VALUES ('$user_name','$update_img','$user_email','$user_pass','$user_address','$user_phone','$user_date','$user_gender','$user_bio','$user_edu','$user_role','$user_status')";
 
-                                    $addusersdb = mysqli_query($db, $addusers);
+                                    //3 steps //sql //sql>database //feedback
 
-                                    if ($addusersdb) {
+
+                                    $user_sql = "INSERT INTO users (u_name,u_image,u_email,u_password,u_address,u_phone,u_dob,u_gender,u_bio,u_education,u_role,u_status) VALUES ('$user_name','', '$user_email','$user_pass', '$user_address', 0, 0, 0,  'user_bio', '$user_edu', 0, 0)";
+                                    
+                                    //('$user_name','$update_img', '$user_email','$user_pass', '$user_address','$user_phone', '$user_date', '$user_gender', 'user_bio', '$user_edu', '$user_role','$user_status')
+
+                                    $user_result = mysqli_query($db, $user_sql);
+
+                                    if ($user_result) {
                                         header('Location: users.php');
                                     } else {
-                                        echo "INPUT Users details failed";
+                                        echo "catagory insert Error";
                                     }
                                 } else {
                                     echo "file name format error! This is not an image";
@@ -138,14 +145,12 @@
                             }
                         }
 
-
                         ?>
-
                     </ul>
                 </div>
+
             </div>
         </div>
-
 
     <?php
     }
