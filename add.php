@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputFilepho">Photo Upload*</label>
-                                        <input name="user_image" type="file" class="form-control-file" id="exampleInputFilepho" aria-describedby="fileHelp">
+                                        <input name="user_image" type="file" class="form-control-file" id="exampleInputFilepho">
                                         <br>
                                         <small id="fileHelp" class="form-text text-muted">Select Photo Only, Don't upload photo more than 1mb. upload jpg png jpeg format only</small>
                                     </div>
